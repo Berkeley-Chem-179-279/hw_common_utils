@@ -8,9 +8,12 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     g++ \
     gdb \
+    clang-format \
+    clang-tidy \
     cmake \
     make \
     git \
+    pre-commit \
     libopenblas-dev \
     liblapacke-dev \
     libarpack2-dev \
