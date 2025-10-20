@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y \
     python3-wheel \
     && rm -rf /var/lib/apt/lists/*
 
-# Clone
+# HighFive
 RUN git clone --recursive  https://github.com/highfive-devs/highfive.git && \ 
     cd highfive && \
     mkdir build && \
@@ -41,6 +41,16 @@ RUN git clone --recursive  https://github.com/highfive-devs/highfive.git && \
     cd ../.. && \ 
     rm -rf HighFive 
 
+# Chemfiles
+RUN git clone https://github.com/chemfiles/chemfiles.git && \
+    cd chemfiles && \
+    mkdir build && cd build && \
+    cmake .. \ 
+        -DCMAKE_BUILD_TYPE=Release && \
+    cmake --build . -- -j$(nproc) && \
+    ctest && \
+    cmake --build . --target install && \
+    ldconfig
 
 # Set up a virtual environment
 RUN python3 -m venv /opt/venv
